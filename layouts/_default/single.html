@@ -19,8 +19,8 @@
     </header>
 
     <div class="p-6">
-        {{ with .Params.image }}
-        <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-64 object-cover rounded-lg mb-6">
+        {{ with .Resources.GetMatch "images/*" }}
+        <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" class="w-full h-64 object-cover rounded-lg mb-6">
         {{ end }}
 
         <div class="prose max-w-none">
@@ -35,8 +35,8 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             {{ range . }}
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                {{ with .Params.image }}
-                <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-32 object-cover">
+                {{ with .Resources.GetMatch "images/*" }}
+                <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" class="w-full h-32 object-cover">
                 {{ end }}
                 <div class="p-4">
                     <h3 class="font-semibold text-lg mb-2">

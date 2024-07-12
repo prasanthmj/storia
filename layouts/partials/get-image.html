@@ -1,0 +1,15 @@
+{{- $image := "" -}}
+{{- $alt := .alt | default .Title -}}
+{{- $class := .class | default "w-full h-64 object-cover rounded-lg" -}}
+
+{{- with .Params.image -}}
+    {{- $image = . -}}
+{{- else -}}
+    {{- with .Resources.GetMatch "images/*" -}}
+        {{- $image = .RelPermalink -}}
+    {{- end -}}
+{{- end -}}
+
+{{- with $image -}}
+    <img src="{{ . }}" alt="{{ $alt }}" class="{{ $class }}">
+{{- end -}}
