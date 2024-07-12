@@ -18,7 +18,7 @@
                 <p class="text-sm text-gray-600 mb-4">
                     Published on {{ .Date.Format "January 2, 2006" }}
                 </p>
-                {{ partial "get-image.html" (dict "context" . "class" "w-full h-64 object-cover rounded-lg mb-6") }}
+                {{ partial "get-image.html" (dict "context" . "class" "w-full h-64 object-cover rounded-lg mb-4") }}
                 <div class="prose max-w-none mb-4">
                     {{ .Summary }}
                 </div>
@@ -27,7 +27,7 @@
             {{ end }}
         </div>
 
-        {{ template "_internal/pagination.html" . }}
+        {{ partial "pagination.html" . }}
     </div>
 </div>
 {{ end }}
