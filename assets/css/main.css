@@ -4,11 +4,22 @@
 
 @layer base {
   body {
+    font-size: 20px;
+  }
+
+  html,
+  body {
+    overscroll-behavior: none;
+  }
+
+  body {
     @apply bg-background text-text;
   }
+
   a {
     @apply text-primary;
   }
+
   a:hover {
     @apply underline;
   }
@@ -18,9 +29,11 @@
   .btn {
     @apply px-4 py-2 rounded;
   }
+
   .btn-primary {
     @apply bg-primary text-white;
   }
+
   .btn-secondary {
     @apply bg-secondary text-white;
   }

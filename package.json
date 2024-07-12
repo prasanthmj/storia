@@ -1,13 +1,12 @@
 {
-  "name": "storia",
+  "name": "storia-hugo-theme",
   "version": "1.0.0",
-  "description": "An elegant and customizable Hugo theme for video creators using Tailwind CSS",
+  "description": "A clean and elegant Hugo theme for content creators",
   "scripts": {
-    "build:css": "tailwindcss -i ./assets/css/main.css -o ./static/css/style.css --minify"
+    "build": "tailwindcss -i ./assets/css/main.css -o ./static/css/style.css --minify"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.23",
-    "tailwindcss": "^3.3.2"
+    "tailwindcss": "^3.3.2",
+    "@tailwindcss/typography": "^0.5.9"
   }
 }

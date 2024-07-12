@@ -1,6 +1,10 @@
 module.exports = {
-    content: ["./layouts/**/*.html", "./content/**/*.md"],
-    theme: {
+  content: [
+    "./layouts/**/*.html",
+    "./content/**/*.md",
+    "./content/**/*.html"
+  ],
+  theme: {
       extend: {
         colors: {
           primary: '#3498db',
@@ -10,6 +14,8 @@ module.exports = {
           header: '#2c3e50',
         },
       },
-    },
-    plugins: [],
-  }
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
+}
