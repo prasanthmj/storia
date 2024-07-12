@@ -1,7 +1,7 @@
 {{ define "main" }}
 <article class="bg-white shadow-md rounded-lg overflow-hidden">
     <header class="p-6 bg-gray-50 border-b">
-        <h1 class="text-3xl font-bold mb-2">{{ .Title }}</h1>
+        <h1 class="text-3xl font-bold mb-2 font-serif">{{ .Title }}</h1>
         <div class="text-sm text-gray-600">
             <span>Published on {{ .Date.Format "January 2, 2006" }}</span>
             <span class="mx-2">|</span>
@@ -29,13 +29,13 @@
     {{ $related := .Site.RegularPages.Related . | first 3 }}
     {{ with $related }}
     <footer class="p-6 bg-gray-50 border-t mt-6">
-        <h2 class="text-2xl font-bold mb-4">Related Articles</h2>
+        <h2 class="text-2xl font-bold mb-4 font-serif">Related Articles</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             {{ range . }}
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 {{ partial "get-image.html" (dict "context" . "class" "w-full h-32 object-cover") }}
                 <div class="p-4">
-                    <h3 class="font-semibold text-lg mb-2">
+                    <h3 class="font-semibold text-lg mb-2 font-serif">
                         <a href="{{ .RelPermalink }}" class="text-blue-600 hover:text-blue-800">{{ .Title }}</a>
                     </h3>
                     <p class="text-sm text-gray-600">{{ .Date.Format "January 2, 2006" }}</p>
