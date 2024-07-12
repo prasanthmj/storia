@@ -1,0 +1,12 @@
+name = "storia"
+license = "MIT"
+licenselink = "https://github.com/yourusername/storia/blob/master/LICENSE"
+description = "An elegant and customizable Hugo theme using Tailwind CSS"
+homepage = "https://github.com/yourusername/storia"
+tags = ["elegant", "customizable", "tailwind"]
+features = ["responsive", "customizable colors", "tailwind css"]
+min_version = "0.41.0"
+
+[author]
+  name = "Your Name"
+  homepage = "https://yourwebsite.com"

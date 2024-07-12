@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<!-- Storia Theme for Hugo -->
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<head>
+    {{ partial "head.html" . }}
+    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+</head>
+<body class="flex flex-col min-h-screen">
+    {{ partial "header.html" . }}
+    <main class="flex-grow container mx-auto px-4 py-8">
+        {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "footer.html" . }}
+    <script src="{{ "js/main.js" | relURL }}"></script>
+</body>
+</html>
