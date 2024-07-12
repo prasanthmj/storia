@@ -1,32 +1,36 @@
 {{ define "main" }}
-<div class="container mx-auto px-4">
-    <h1 class="text-4xl font-bold mb-8 text-center">{{ .Title }}</h1>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {{ range first 6 (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) }}
-        <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            {{ if .Params.image }}
-            <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-full h-48 object-cover">
-            {{ else }}
-            <div class="w-full h-48 bg-gray-300 flex items-center justify-center">
-                <span class="text-gray-500">No Image</span>
+<div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <h1 class="text-3xl font-bold p-6 bg-gray-50 border-b">{{ .Title }}</h1>
+    <div class="p-6">
+        {{ if .Content }}
+            <div class="prose max-w-none mb-8">
+                {{ .Content }}
             </div>
-            {{ end }}
-            <div class="p-6">
-                <h2 class="text-xl font-semibold mb-2">
+        {{ end }}
+
+        <div class="space-y-8">
+            {{ $paginator := .Paginate (where .Site.RegularPages "Section" "in" .Site.Params.mainSections) }}
+            {{ range $paginator.Pages }}
+            <article class="border-b border-gray-200 pb-8 mb-8 last:border-b-0 last:pb-0 last:mb-0">
+                <h2 class="text-2xl font-semibold mb-2">
                     <a href="{{ .Permalink }}" class="text-blue-600 hover:text-blue-800">{{ .Title }}</a>
                 </h2>
-                <p class="text-gray-600 mb-4">{{ .Summary }}</p>
-                <a href="{{ .Permalink }}" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-200">Read More</a>
-            </div>
+                <p class="text-sm text-gray-600 mb-4">
+                    Published on {{ .Date.Format "January 2, 2006" }}
+                    in 
+                    <a href="{{ .Section | urlize | absURL }}" class="text-blue-600 hover:text-blue-800">
+                        {{ .Section | humanize }}
+                    </a>
+                </p>
+                <div class="prose max-w-none mb-4">
+                    {{ .Summary }}
+                </div>
+                <a href="{{ .Permalink }}" class="text-blue-600 hover:text-blue-800 font-medium">Read more →</a>
+            </article>
+            {{ end }}
         </div>
-        {{ end }}
-    </div>
 
-    <div class="mt-12 text-center">
-        <a href="/videos" class="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-200 text-lg font-semibold">
-            View All Videos
-        </a>
+        {{ template "_internal/pagination.html" . }}
     </div>
 </div>
 {{ end }}

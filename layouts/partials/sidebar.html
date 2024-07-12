@@ -1,0 +1,34 @@
+<div class="bg-white shadow-md rounded-lg p-6">
+    <div class="lg:sticky lg:top-8">
+        <h2 class="text-xl font-semibold mb-4">Sections</h2>
+        <ul class="space-y-2">
+            {{ range .Site.Sections }}
+            <li>
+                <a href="{{ .RelPermalink }}" class="text-blue-600 hover:text-blue-800">
+                    {{ .Title | default (.Name | humanize) }} ({{ len .Pages }})
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+
+        <div class="mt-8">
+            <h2 class="text-xl font-semibold mb-4">Featured Content</h2>
+            {{ $mainSections := .Site.Params.mainSections }}
+            {{ $pages := where .Site.RegularPages "Section" "in" $mainSections }}
+            {{ range first 3 $pages }}
+            <div class="mb-4">
+                <a href="{{ .Permalink }}" class="text-blue-600 hover:text-blue-800 font-medium">{{ .Title }}</a>
+                <p class="text-sm text-gray-600">{{ .Date.Format "January 2, 2006" }}</p>
+            </div>
+            {{ end }}
+        </div>
+
+        <!-- Placeholder for future banners -->
+        <div class="mt-8">
+            <h2 class="text-xl font-semibold mb-4">Sponsored</h2>
+            <div class="bg-gray-200 h-40 flex items-center justify-center text-gray-500">
+                Banner Placeholder
+            </div>
+        </div>
+    </div>
+</div>
