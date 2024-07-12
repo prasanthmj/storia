@@ -22,9 +22,7 @@
                         {{ .Section | humanize }}
                     </a>
                 </p>
-                {{ with .Resources.GetMatch "images/*" }}
-                <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" class="w-full h-64 object-cover rounded-lg mb-4">
-                {{ end }}
+                {{ partial "get-image.html" (dict "context" . "class" "w-full h-64 object-cover rounded-lg mb-6") }}
                 <div class="prose max-w-none mb-4">
                     {{ .Summary }}
                 </div>

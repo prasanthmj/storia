@@ -19,9 +19,7 @@
     </header>
 
     <div class="p-6">
-        {{ with .Resources.GetMatch "images/*" }}
-        <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" class="w-full h-64 object-cover rounded-lg mb-6">
-        {{ end }}
+        {{ partial "get-image.html" (dict "context" . "class" "w-full h-64 object-cover rounded-lg mb-6") }}
 
         <div class="prose max-w-none">
             {{ .Content }}
@@ -35,9 +33,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             {{ range . }}
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                {{ with .Resources.GetMatch "images/*" }}
-                <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" class="w-full h-32 object-cover">
-                {{ end }}
+                {{ partial "get-image.html" (dict "context" . "class" "w-full h-32 object-cover") }}
                 <div class="p-4">
                     <h3 class="font-semibold text-lg mb-2">
                         <a href="{{ .RelPermalink }}" class="text-blue-600 hover:text-blue-800">{{ .Title }}</a>

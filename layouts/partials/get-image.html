@@ -1,15 +1,22 @@
-{{- $image := "" -}}
-{{- $alt := .alt | default .Title -}}
+{{- $context := .context -}}
 {{- $class := .class | default "w-full h-64 object-cover rounded-lg" -}}
+{{- $alt := $context.Title -}}
 
-{{- with .Params.image -}}
-    {{- $image = . -}}
+{{- $image := "" -}}
+{{- with $context.Params.image -}}
+    {{- if hasPrefix . "http" -}}
+        {{- $image = . -}}
+    {{- else if hasPrefix . "/" -}}
+        {{- $image = . -}}
+    {{- else -}}
+        {{- $image = path.Join $context.RelPermalink . -}}
+    {{- end -}}
 {{- else -}}
-    {{- with .Resources.GetMatch "images/*" -}}
+    {{- with $context.Resources.GetMatch "images/*" -}}
         {{- $image = .RelPermalink -}}
     {{- end -}}
 {{- end -}}
 
-{{- with $image -}}
-    <img src="{{ . }}" alt="{{ $alt }}" class="{{ $class }}">
+{{- if $image -}}
+    <img src="{{ $image }}" alt="{{ $alt }}" class="{{ $class }}">
 {{- end -}}
