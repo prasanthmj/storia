@@ -1,0 +1,38 @@
+<footer class="bg-gray-800 text-white mt-12">
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-wrap justify-between">
+            <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                <h3 class="text-xl font-bold mb-4">{{ .Site.Title }}</h3>
+                <p class="text-gray-400">{{ .Site.Params.description }}</p>
+            </div>
+            <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    {{ range .Site.Menus.main }}
+                    <li><a href="{{ .URL }}" class="text-gray-400 hover:text-white">{{ .Name }}</a></li>
+                    {{ end }}
+                </ul>
+            </div>
+            <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                <h3 class="text-xl font-bold mb-4">Connect</h3>
+                <ul class="space-y-2">
+                    {{ with .Site.Params.twitter }}
+                    <li><a href="{{ . }}" class="text-gray-400 hover:text-white" target="_blank">Twitter</a></li>
+                    {{ end }}
+                    {{ with .Site.Params.facebook }}
+                    <li><a href="{{ . }}" class="text-gray-400 hover:text-white" target="_blank">Facebook</a></li>
+                    {{ end }}
+                    {{ with .Site.Params.instagram }}
+                    <li><a href="{{ . }}" class="text-gray-400 hover:text-white" target="_blank">Instagram</a></li>
+                    {{ end }}
+                    {{ with .Site.Params.linkedin }}
+                    <li><a href="{{ . }}" class="text-gray-400 hover:text-white" target="_blank">LinkedIn</a></li>
+                    {{ end }}
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}. </p>
+        </div>
+    </div>
+</footer>
