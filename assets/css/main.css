@@ -10,7 +10,7 @@
   --color-text: #2d3748;
   --color-text-light: #4a5568;
   --color-navbar-bg: #2d3748;
-  --color-navbar-text: #ffffff;
+  --color-navbar-text: #cbd5e1;
 }
 
 @layer base {
@@ -48,11 +48,11 @@
   }
 
   .nav-link {
-    @apply text-navbar-text hover:text-secondary;
+    @apply text-navbar-text hover:text-white;
   }
-
+  
   .footer-link {
-    @apply text-navbar-text hover:text-secondary;
+    @apply text-navbar-text hover:text-white ;
   }
 }
 

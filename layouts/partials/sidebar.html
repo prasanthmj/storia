@@ -11,21 +11,18 @@
             {{ end }}
         </ul>
         <div class="mt-8">
-            <h2 class="text-xl font-bold mb-4 font-serif text-primary">Featured Content</h2>
+            <h2 class="text-xl font-bold mb-4 font-serif text-gray-400">Featured</h2>
             {{ $mainSections := .Site.Params.mainSections }}
             {{ $pages := where .Site.RegularPages "Section" "in" $mainSections }}
-            {{ range first 3 $pages }}
-            <div class="mb-4">
-                <a href="{{ .Permalink }}" class="content-link font-medium font-serif">{{ .Title }}</a>
+            {{ range first 5 $pages }}
+            <div class="mb-4 pl-2">
+                <a href="{{ .Permalink }}" class="content-link font-normal font-serif">{{ .Title }}</a>
+                {{ if $.Site.Params.showPublishDate }}
                 <p class="text-sm text-text-light">{{ .Date.Format "January 2, 2006" }}</p>
+                {{ end }}
             </div>
             {{ end }}
         </div>
-        <div class="mt-8">
-            <h2 class="text-xl font-bold mb-4 font-serif text-primary">Sponsored</h2>
-            <div class="bg-text-light h-40 flex items-center justify-center text-background">
-                Banner Placeholder
-            </div>
-        </div>
+       
     </div>
 </div>
