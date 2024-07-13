@@ -1,6 +1,8 @@
 {{ define "main" }}
 <div class="bg-background shadow-md rounded-lg overflow-hidden">
+    {{ if .Title }}
     <h1 class="text-4xl font-bold p-6 bg-background border-b border-text-light font-serif text-primary">{{ .Title }}</h1>
+    {{ end }}
     <div class="p-6">
         {{ if .Content }}
             <div class="article-content text-text mb-8">
@@ -16,8 +18,10 @@
                     <a href="{{ .Permalink }}" class="text-accent hover:text-primary">{{ .Title }}</a>
                 </h2>
                 <p class="text-base text-text-light mb-4">
+                    {{ if $.Site.Params.showPublishDate }}
                     Published on {{ .Date.Format "January 2, 2006" }}
-                    in 
+                    {{ end }}
+                    In 
                     <a href="{{ .Section | urlize | absURL }}" class="text-accent hover:text-primary">
                         {{ .Section | humanize }}
                     </a>

@@ -30,6 +30,9 @@ params:
   # customFonts:
   #   - "https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lora:wght@400;700&display=swap"
 
+  # Display options
+  showPublishDate: true  # Set to false to hide publication dates
+
   # Social media links
   twitter: "https://twitter.com/yourusername"
   facebook: "https://facebook.com/yourusername"

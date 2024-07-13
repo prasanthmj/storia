@@ -3,8 +3,10 @@
     <header class="p-6 bg-background border-b border-text-light">
         <h1 class="text-4xl font-bold mb-2 font-serif text-primary">{{ .Title }}</h1>
         <div class="text-base text-text-light">
+            {{ if .Site.Params.showPublishDate }}
             <span>Published on {{ .Date.Format "January 2, 2006" }}</span>
             <span class="mx-2">|</span>
+            {{ end }}
             <span>In <a href="{{ .Section | urlize | absURL }}" class="text-accent hover:text-primary">{{ .Section | humanize }}</a></span>
             {{ with .Params.tags }}
             <span class="mx-2">|</span>

@@ -71,6 +71,18 @@ params:
     serif: "Lora"
 ```
 
+### Customizing Display Options
+
+You can customize certain display options in the `config.yaml` file:
+
+```yaml
+params:
+  showPublishDate: true  # Set to false to hide publication dates
+```
+
+Setting `showPublishDate` to `false` will hide the publication date on all posts across your site.
+
+
 ## Development
 
 This theme uses pnpm for managing dependencies. To set up your development environment:
