@@ -17,8 +17,8 @@ module.exports = {
         'navbar-text': 'var(--color-navbar-text)',
       },
       fontFamily: {
-        'sans': ['Open Sans', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
-        'serif': ['Merriweather', 'ui-serif', 'Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
+        'sans': ['var(--font-sans)'],
+        'serif': ['var(--font-serif)'],
       },
     },
   },

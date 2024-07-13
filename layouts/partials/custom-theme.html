@@ -1,0 +1,17 @@
+<style>
+    :root {
+      /* Colors */
+      --color-primary: {{ .Site.Params.colors.primary | default "#3490dc" }};
+      --color-secondary: {{ .Site.Params.colors.secondary | default "#ffed4a" }};
+      --color-accent: {{ .Site.Params.colors.accent | default "#f6993f" }};
+      --color-background: {{ .Site.Params.colors.background | default "#ffffff" }};
+      --color-text: {{ .Site.Params.colors.text | default "#2d3748" }};
+      --color-text-light: {{ .Site.Params.colors.textLight | default "#4a5568" }};
+      --color-navbar-bg: {{ .Site.Params.colors.navbarBg | default "#2d3748" }};
+      --color-navbar-text: {{ .Site.Params.colors.navbarText | default "#ffffff" }};
+    
+      /* Fonts */
+      --font-sans: {{ .Site.Params.fonts.sans | default "Open Sans" }}, sans-serif;
+      --font-serif: {{ .Site.Params.fonts.serif | default "Merriweather" }}, serif;
+    }
+</style>
