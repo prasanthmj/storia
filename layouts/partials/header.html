@@ -1,28 +1,27 @@
 <header class="bg-navbar-bg text-navbar-text">
   <div class="container mx-auto px-4 py-4 flex flex-wrap items-center justify-between">
-    <div class="flex items-center">
-      {{ if .Site.Params.logo }}
-        <img src="{{ .Site.Params.logo | relURL }}" alt="{{ .Site.Title }} Logo" class="h-8 w-8 mr-3">
-      {{ end }}
-      <a href="{{ .Site.Home.RelPermalink }}" class="text-xl font-bold">{{ .Site.Title }}</a>
-    </div>
-    <nav class="hidden md:flex space-x-4">
-      {{ range .Site.Menus.main }}
-        <a href="{{ .URL }}" class="hover:text-secondary transition-colors duration-200">{{ .Name }}</a>
-      {{ end }}
-    </nav>
-    <button class="md:hidden text-navbar-text hover:text-secondary focus:outline-none">
-      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
+      <div class="flex items-center">
+          {{ if .Site.Params.logo }}
+          <img src="{{ .Site.Params.logo | relURL }}" alt="{{ .Site.Title }} Logo" class="h-8 w-8 mr-3">
+          {{ end }}
+          <a href="{{ .Site.Home.RelPermalink }}" class="text-xl font-bold nav-link">{{ .Site.Title }}</a>
+      </div>
+      <nav class="hidden md:flex space-x-4">
+          {{ range .Site.Menus.main }}
+          <a href="{{ .URL }}" class="nav-link">{{ .Name }}</a>
+          {{ end }}
+      </nav>
+      <button class="md:hidden text-navbar-text hover:text-secondary focus:outline-none">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+      </button>
   </div>
-  <!-- Mobile menu, show/hide based on menu state -->
   <div class="md:hidden hidden" id="mobile-menu">
-    <div class="px-2 pt-2 pb-3 space-y-1">
-      {{ range .Site.Menus.main }}
-        <a href="{{ .URL }}" class="block px-3 py-2 hover:bg-primary hover:text-navbar-text rounded-md">{{ .Name }}</a>
-      {{ end }}
-    </div>
+      <div class="px-2 pt-2 pb-3 space-y-1">
+          {{ range .Site.Menus.main }}
+          <a href="{{ .URL }}" class="block px-3 py-2 nav-link">{{ .Name }}</a>
+          {{ end }}
+      </div>
   </div>
 </header>

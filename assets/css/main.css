@@ -27,13 +27,7 @@
     @apply bg-background text-text;
   }
 
-  a {
-    @apply text-primary;
-  }
-
-  a:hover {
-    @apply underline;
-  }
+  /* Removed general anchor tag style */
 }
 
 @layer components {
@@ -48,71 +42,41 @@
   .btn-secondary {
     @apply bg-secondary text-white;
   }
-}
 
-/* Add any custom styles here */
+  .content-link {
+    @apply text-accent hover:text-primary;
+  }
+
+  .nav-link {
+    @apply text-navbar-text hover:text-secondary;
+  }
+
+  .footer-link {
+    @apply text-navbar-text hover:text-secondary;
+  }
+}
 
 /* Custom Typography Styles */
 @layer base {
-  body {
-    @apply bg-background text-text;
-  }
-
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif font-bold text-primary leading-tight mb-4;
   }
 
-  h1 {
-    @apply text-4xl;
-  }
+  h1 { @apply text-4xl; }
+  h2 { @apply text-3xl; }
+  h3 { @apply text-2xl; }
+  h4 { @apply text-xl; }
+  h5 { @apply text-lg; }
+  h6 { @apply text-base; }
 
-  h2 {
-    @apply text-3xl;
-  }
+  p { @apply mb-4 text-lg; }
 
-  h3 {
-    @apply text-2xl;
-  }
+  ul, ol { @apply mb-4 pl-8; }
+  li { @apply mb-2; }
 
-  h4 {
-    @apply text-xl;
-  }
-
-  h5 {
-    @apply text-lg;
-  }
-
-  h6 {
-    @apply text-base;
-  }
-
-  p {
-    @apply mb-4 text-lg;
-  }
-
-  a {
-    @apply text-accent hover:text-primary;
-  }
-
-  ul, ol {
-    @apply mb-4 pl-8;
-  }
-
-  li {
-    @apply mb-2;
-  }
-
-  blockquote {
-    @apply border-l-4 border-gray-300 pl-4 italic my-4;
-  }
-
-  pre {
-    @apply bg-gray-100 p-4 rounded-lg overflow-x-auto mb-4;
-  }
-
-  code {
-    @apply bg-gray-100 px-1 py-0.5 rounded;
-  }
+  blockquote { @apply border-l-4 border-gray-300 pl-4 italic my-4; }
+  pre { @apply bg-gray-100 p-4 rounded-lg overflow-x-auto mb-4; }
+  code { @apply bg-gray-100 px-1 py-0.5 rounded; }
 }
 
 /* Article specific styles */

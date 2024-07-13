@@ -4,26 +4,23 @@
         <ul class="space-y-2">
             {{ range .Site.Sections }}
             <li>
-                <a href="{{ .RelPermalink }}" class="text-accent hover:text-primary">
+                <a href="{{ .RelPermalink }}" class="content-link">
                     {{ .Title | default (.Name | humanize) }} ({{ len .Pages }})
                 </a>
             </li>
             {{ end }}
         </ul>
-
         <div class="mt-8">
             <h2 class="text-xl font-bold mb-4 font-serif text-primary">Featured Content</h2>
             {{ $mainSections := .Site.Params.mainSections }}
             {{ $pages := where .Site.RegularPages "Section" "in" $mainSections }}
             {{ range first 3 $pages }}
             <div class="mb-4">
-                <a href="{{ .Permalink }}" class="text-accent hover:text-primary font-medium font-serif">{{ .Title }}</a>
+                <a href="{{ .Permalink }}" class="content-link font-medium font-serif">{{ .Title }}</a>
                 <p class="text-sm text-text-light">{{ .Date.Format "January 2, 2006" }}</p>
             </div>
             {{ end }}
         </div>
-
-        <!-- Placeholder for future banners -->
         <div class="mt-8">
             <h2 class="text-xl font-bold mb-4 font-serif text-primary">Sponsored</h2>
             <div class="bg-text-light h-40 flex items-center justify-center text-background">
