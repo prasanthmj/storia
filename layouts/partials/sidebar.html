@@ -1,6 +1,6 @@
 <div class="bg-background p-6">
     <div class="lg:sticky lg:top-8">
-        <h2 class="text-xl font-bold mb-4 font-serif text-primary">Sections</h2>
+        
         <ul class="space-y-2">
             {{ range .Site.Sections }}
             <li>
@@ -11,16 +11,24 @@
             {{ end }}
         </ul>
         <div class="mt-8">
-            <h2 class="text-xl font-bold mb-4 font-serif text-primary">Featured</h2>
+            
             {{ $mainSections := .Site.Params.mainSections }}
             {{ $pages := where .Site.RegularPages "Section" "in" $mainSections }}
             {{ range first 5 $pages }}
-            <div class="mb-4 pl-2">
-                <a href="{{ .Permalink }}" class="content-link font-normal font-serif">{{ .Title }}</a>
-                {{ if $.Site.Params.showPublishDate }}
-                <p class="text-sm text-text-light">{{ .Date.Format "January 2, 2006" }}</p>
-                {{ end }}
+            <div class="bg-background rounded-lg shadow-md overflow-hidden px-4 mb-5">
+                {{ partial "get-image.html" (dict "context" . "class" "w-full h-32 object-cover") }}
+                <div class="p-4">
+                    <h3 class="font-semibold text-lg mb-2 font-serif">
+                        <a href="{{ .RelPermalink }}" class="text-accent hover:text-primary">{{ .Title }}</a>
+                    </h3>
+                    {{ if $.Site.Params.showPublishDate }}
+                    <p class="text-base text-text-light">{{ .Date.Format "January 2, 2006" }}</p>
+                    {{ end }}
+                    <div class="text-sm">In <a href="{{ .Section | urlize | absURL }}" class="content-link text-sm">{{ .Section | humanize }}</a></div>
+                </div>
             </div>
+
+            
             {{ end }}
         </div>
        
