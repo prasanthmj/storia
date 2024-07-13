@@ -1,9 +1,9 @@
 {{ define "main" }}
-<div class="bg-white shadow-md rounded-lg overflow-hidden">
-    <h1 class="p-6 bg-gray-50 border-b">{{ .Title }}</h1>
+<div class="bg-background shadow-md rounded-lg overflow-hidden">
+    <h1 class="text-4xl font-bold p-6 bg-background border-b border-text-light font-serif text-primary">{{ .Title }}</h1>
     <div class="p-6">
         {{ if .Content }}
-            <div class="article-content mb-8">
+            <div class="article-content text-text mb-8">
                 {{ .Content }}
             </div>
         {{ end }}
@@ -11,22 +11,22 @@
         <div class="space-y-8">
             {{ $paginator := .Paginate (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) }}
             {{ range $paginator.Pages }}
-            <article class="border-b border-gray-200 pb-8 mb-8 last:border-b-0 last:pb-0 last:mb-0">
-                <h2 class="mb-2">
-                    <a href="{{ .Permalink }}">{{ .Title }}</a>
+            <article class="border-b border-text-light pb-8 mb-8 last:border-b-0 last:pb-0 last:mb-0">
+                <h2 class="text-2xl font-semibold mb-2 font-serif">
+                    <a href="{{ .Permalink }}" class="text-accent hover:text-primary">{{ .Title }}</a>
                 </h2>
-                <p class="text-base text-gray-600 mb-4">
+                <p class="text-base text-text-light mb-4">
                     Published on {{ .Date.Format "January 2, 2006" }}
                     in 
-                    <a href="{{ .Section | urlize | absURL }}">
+                    <a href="{{ .Section | urlize | absURL }}" class="text-accent hover:text-primary">
                         {{ .Section | humanize }}
                     </a>
                 </p>
                 {{ partial "get-image.html" (dict "context" . "class" "w-full h-64 object-cover rounded-lg mb-4") }}
-                <div class="article-content mb-4">
+                <div class="article-content text-text mb-4">
                     {{ .Summary }}
                 </div>
-                <a href="{{ .Permalink }}" class="font-medium">Read more →</a>
+                <a href="{{ .Permalink }}" class="text-accent hover:text-primary font-medium">Read more →</a>
             </article>
             {{ end }}
         </div>

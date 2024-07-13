@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-primary: #3490dc;
+  --color-secondary: #ffed4a;
+  --color-accent: #f6993f;
+  --color-background: #ffffff;
+  --color-text: #2d3748;
+  --color-text-light: #4a5568;
+  --color-navbar-bg: #2d3748;
+  --color-navbar-text: #ffffff;
+}
+
 @layer base {
   body {
     font-size: 20px;
@@ -44,11 +55,11 @@
 /* Custom Typography Styles */
 @layer base {
   body {
-    @apply font-sans text-gray-800 leading-relaxed;
+    @apply bg-background text-text;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif font-bold leading-tight mb-4;
+    @apply font-serif font-bold text-primary leading-tight mb-4;
   }
 
   h1 {
@@ -80,7 +91,7 @@
   }
 
   a {
-    @apply text-blue-600 hover:text-blue-800;
+    @apply text-accent hover:text-primary;
   }
 
   ul, ol {
