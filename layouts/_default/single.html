@@ -1,6 +1,6 @@
 {{ define "main" }}
-<article class="bg-background shadow-md rounded-lg overflow-hidden">
-    <header class="p-6 bg-background border-b border-text-light">
+<article class="bg-background overflow-hidden">
+    <header class="p-6 bg-background border-text-light">
         <h1 class="text-4xl font-bold mb-2 font-serif text-primary">{{ .Title }}</h1>
         <div class="text-base text-text-light">
             {{ if .Site.Params.showPublishDate }}
@@ -28,10 +28,10 @@
         </div>
     </div>
 
-    {{ $related := .Site.RegularPages.Related . | first 3 }}
+    {{ $related := .Site.RegularPages.Related . | first 6 }}
     {{ with $related }}
-    <footer class="p-6 bg-background border-t border-text-light mt-6">
-        <h2 class="text-2xl font-bold mb-4 font-serif text-primary">Related Articles</h2>
+    <footer class="p-6 bg-background mt-6">
+        
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             {{ range . }}
             <div class="bg-background rounded-lg shadow-md overflow-hidden">
@@ -40,7 +40,10 @@
                     <h3 class="font-semibold text-lg mb-2 font-serif">
                         <a href="{{ .RelPermalink }}" class="text-accent hover:text-primary">{{ .Title }}</a>
                     </h3>
+                    {{ if $.Site.Params.showPublishDate }}
                     <p class="text-base text-text-light">{{ .Date.Format "January 2, 2006" }}</p>
+                    {{ end }}
+                    <div class="text-sm">In <a href="{{ .Section | urlize | absURL }}" class="content-link text-sm">{{ .Section | humanize }}</a></div>
                 </div>
             </div>
             {{ end }}

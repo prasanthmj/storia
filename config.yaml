@@ -15,7 +15,7 @@ params:
   colors:
     primary: "#3490dc"
     secondary: "#ffed4a"
-    accent: "#f6993f"
+    accent: "#8C2318"
     background: "#ffffff"
     text: "#2d3748"
     textLight: "#4a5568"

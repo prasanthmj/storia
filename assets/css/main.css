@@ -2,16 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --color-primary: #3490dc;
-  --color-secondary: #ffed4a;
-  --color-accent: #f6993f;
-  --color-background: #ffffff;
-  --color-text: #2d3748;
-  --color-text-light: #4a5568;
-  --color-navbar-bg: #2d3748;
-  --color-navbar-text: #cbd5e1;
-}
+
 
 @layer base {
   body {
