@@ -39,9 +39,10 @@
   }
 
   .nav-link {
-    @apply text-navbar-text hover:text-white;
+    @apply text-navbar-text transition-all duration-200 hover:scale-110 hover:text-white;
   }
-  
+
+   
   .footer-link {
     @apply text-navbar-text hover:text-white ;
   }
@@ -53,7 +54,10 @@
     @apply font-serif font-bold text-primary leading-tight mb-4;
   }
 
-  h1 { @apply text-4xl; }
+  h1 { 
+    @apply text-4xl; 
+    line-height: 2.75rem;
+  }
   h2 { @apply text-3xl; }
   h3 { @apply text-2xl; }
   h4 { @apply text-xl; }
@@ -81,4 +85,8 @@
 
 .article-content img {
   @apply max-w-full h-auto rounded-lg;
+}
+
+.article-content a {
+  @apply text-red-700 hover:underline;
 }
