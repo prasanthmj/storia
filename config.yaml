@@ -39,6 +39,12 @@ params:
   instagram: "https://instagram.com/yourusername"
   linkedin: "https://linkedin.com/in/yourusername"
 
+  analytics:
+    enabled: true
+    provider: "umami"  # Can be "umami", "google", etc.
+    umamiConfig:
+      scriptUrl: "https://cloud.umami.is/script.js"
+      websiteId: ""  # User will replace this with their ID
 menu:
   main:
     - identifier: "home"

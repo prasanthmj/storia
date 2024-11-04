@@ -2,49 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer base {
   body {
     font-size: 20px;
   }
-
   html,
   body {
     overscroll-behavior: none;
   }
-
   body {
     @apply bg-background text-text;
   }
-
-  /* Removed general anchor tag style */
 }
 
 @layer components {
   .btn {
     @apply px-4 py-2 rounded;
   }
-
   .btn-primary {
     @apply bg-primary text-white;
   }
-
   .btn-secondary {
     @apply bg-secondary text-white;
   }
-
   .content-link {
     @apply text-accent hover:text-primary;
   }
-
   .nav-link {
     @apply text-navbar-text transition-all duration-200 hover:scale-110 hover:text-white;
   }
-
    
   .footer-link {
-    @apply text-navbar-text hover:text-white ;
+    @apply text-navbar-text hover:text-white;
   }
 }
 
@@ -53,7 +42,6 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif font-bold text-primary leading-tight mb-4;
   }
-
   h1 { 
     @apply text-4xl; 
     line-height: 2.75rem;
@@ -63,12 +51,39 @@
   h4 { @apply text-xl; }
   h5 { @apply text-lg; }
   h6 { @apply text-base; }
-
   p { @apply mb-4 text-lg; }
-
-  ul, ol { @apply mb-4 pl-8; }
-  li { @apply mb-2; }
-
+  
+  /* Updated list styles to be more specific */
+  .article-content ul, 
+  .article-content ol,
+  .content ul,
+  .content ol { 
+    @apply mb-4 pl-8;
+  }
+  
+  .article-content ul,
+  .content ul {
+    @apply list-disc;
+  }
+  
+  .article-content ol,
+  .content ol {
+    @apply list-decimal;
+  }
+  
+  .article-content li,
+  .content li { 
+    @apply mb-2;
+  }
+  
+  /* Preserve navigation list styles */
+  nav ul,
+  .nav ul,
+  footer ul,
+  .sidebar ul {
+    @apply list-none pl-0;
+  }
+  
   blockquote { @apply border-l-4 border-gray-300 pl-4 italic my-4; }
   pre { @apply bg-gray-100 p-4 rounded-lg overflow-x-auto mb-4; }
   code { @apply bg-gray-100 px-1 py-0.5 rounded; }
@@ -78,15 +93,12 @@
 .article-content {
   @apply text-lg leading-relaxed;
 }
-
 .article-content > * {
   @apply mb-4;
 }
-
 .article-content img {
   @apply max-w-full h-auto rounded-lg;
 }
-
 .article-content a {
   @apply text-red-700 hover:underline;
 }

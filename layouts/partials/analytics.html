@@ -1,0 +1,10 @@
+{{ if and hugo.IsProduction .Site.Params.analytics.enabled }}
+  {{ if eq .Site.Params.analytics.provider "umami" }}
+    {{ with .Site.Params.analytics.umamiConfig }}
+      <script defer 
+        src="{{ .scriptUrl }}" 
+        data-website-id="{{ .websiteId }}">
+      </script>
+    {{ end }}
+  {{ end }}
+{{ end }}
