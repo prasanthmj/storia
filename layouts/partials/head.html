@@ -1,7 +1,70 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+
+<!-- SEO Meta Tags -->
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
+<meta name="robots" content="index, follow">
+<meta name="author" content="{{ .Site.Params.author }}">
+<meta name="keywords" content="{{ if .Keywords }}{{ delimit .Keywords ", " }}{{ else }}content creation, youtube tips, faceless youtube, video content, content strategy{{ end }}">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ .Permalink }}">
+
+<!-- Feeds -->
+<link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }} RSS Feed" href="{{ "feed.xml" | absURL }}">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="{{ "sitemap.xml" | absURL }}">
+
+<!-- Open Graph -->
+<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}">
+<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+{{ with .Site.Params.logo }}
+<meta property="og:image" content="{{ . | absURL }}">
+{{ end }}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}">
+<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
+{{ with .Site.Params.logo }}
+<meta name="twitter:image" content="{{ . | absURL }}">
+{{ end }}
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": {{ if .IsHome }}"WebSite"{{ else }}"WebPage"{{ end }},
+  "name": "{{ .Site.Title }}",
+  "description": "{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}",
+  "url": "{{ .Permalink }}",
+  {{ if not .IsHome }}"isPartOf": { "@type": "WebSite", "name": "{{ .Site.Title }}", "url": "{{ .Site.BaseURL }}" },{{ end }}
+  "author": {
+    "@type": "Person",
+    "name": "{{ .Site.Params.author }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ .Site.Title }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ .Site.Params.logo | absURL }}"
+    }
+  }
+  {{ if .IsPage }},
+  "datePublished": "{{ .Date.Format "2006-01-02T15:04:05-07:00" }}",
+  "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }}"
+  {{ end }}
+}
+</script>
+
+<!-- Preload Critical Resources -->
+<link rel="preload" href="{{ "css/style.css" | relURL }}" as="style">
+{{ with .Site.Params.logo }}
+<link rel="preload" as="image" href="{{ . }}">
+{{ end }}
 
 <!-- Font loading -->
 {{ if .Site.Params.customFonts }}
@@ -25,3 +88,21 @@
 {{ end }}
 
 {{ partial "analytics.html" . }}
+
+<!-- Error Tracking -->
+{{ if hugo.IsProduction }}
+<script>
+  window.onerror = function(msg, url, lineNo, columnNo, error) {
+    if (window.umami) {
+      window.umami.track('JavaScript Error', {
+        message: msg,
+        url: url,
+        line: lineNo,
+        column: columnNo
+      });
+    }
+    console.error('Error: ' + msg + '\nURL: ' + url + '\nLine: ' + lineNo);
+    return false;
+  };
+</script>
+{{ end }}

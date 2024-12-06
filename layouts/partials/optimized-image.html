@@ -1,0 +1,13 @@
+{{- $image := . -}}
+{{- $loading := cond (or (eq $image.Position "hero") (eq $image.Position "top")) "eager" "lazy" -}}
+{{- $sizes := "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 800px" -}}
+<img 
+  src="{{ $image.Src }}" 
+  alt="{{ $image.Alt }}"
+  loading="{{ $loading }}"
+  class="{{ $image.Class }}"
+  {{ with $image.Width }}width="{{ . }}"{{ end }}
+  {{ with $image.Height }}height="{{ . }}"{{ end }}
+  {{ with $sizes }}sizes="{{ . }}"{{ end }}
+  decoding="async"
+>
