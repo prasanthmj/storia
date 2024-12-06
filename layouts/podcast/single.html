@@ -1,0 +1,67 @@
+{{ define "main" }}
+<article class="max-w-4xl mx-auto px-4 py-8">
+    <header class="mb-8">
+        <h1 class="text-4xl font-bold mb-4">{{ .Title }}</h1>
+        <div class="text-gray-600 mb-4">
+            Episode {{ .Params.episodeNumber }} • {{ .Date.Format "January 2, 2006" }} • {{ .Params.duration }}
+        </div>
+        {{ with .Params.featuredImage }}
+        <img src="{{ . }}" alt="{{ $.Title }}" class="w-full rounded-lg shadow-lg mb-6">
+        {{ end }}
+    </header>
+
+    <!-- Audio Player -->
+    <div class="mb-8">
+        <audio controls class="w-full">
+            <source src="{{ .Params.audioFile }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <!-- Listen on Platforms -->
+    <div class="flex gap-4 mb-8">
+        {{ with .Params.spotifyLink }}
+        <a href="{{ . }}" target="_blank" class="px-4 py-2 bg-green-500 text-white rounded-full hover:bg-green-600">
+            Listen on Spotify
+        </a>
+        {{ end }}
+        {{ with .Params.appleLink }}
+        <a href="{{ . }}" target="_blank" class="px-4 py-2 bg-purple-500 text-white rounded-full hover:bg-purple-600">
+            Apple Podcasts
+        </a>
+        {{ end }}
+        {{ with .Params.googleLink }}
+        <a href="{{ . }}" target="_blank" class="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600">
+            Google Podcasts
+        </a>
+        {{ end }}
+    </div>
+
+    <!-- Show Notes -->
+    <div class="prose max-w-none">
+        <h2 class="text-2xl font-bold mb-4">Show Notes</h2>
+        {{ with .Params.showNotes }}
+        <div class="mb-6">
+            {{ . | markdownify }}
+        </div>
+        {{ end }}
+        
+        <!-- Main Content -->
+        {{ .Content }}
+    </div>
+
+    <!-- Tags -->
+    {{ with .Params.tags }}
+    <div class="mt-8">
+        <h3 class="text-xl font-semibold mb-2">Tags</h3>
+        <div class="flex flex-wrap gap-2">
+            {{ range . }}
+            <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="px-3 py-1 bg-gray-200 rounded-full hover:bg-gray-300">
+                #{{ . }}
+            </a>
+            {{ end }}
+        </div>
+    </div>
+    {{ end }}
+</article>
+{{ end }}

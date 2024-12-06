@@ -1,0 +1,92 @@
+{{ define "main" }}
+<div class="container mx-auto px-4 py-8">
+    <header class="mb-12 text-center">
+        <h1 class="text-4xl font-bold mb-4" style="color: {{ .Site.Params.colors.text }}">{{ .Site.Params.podcast.title }}</h1>
+        <p class="text-xl" style="color: {{ .Site.Params.colors.textLight }}">{{ .Site.Params.podcast.description }}</p>
+    </header>
+
+    <!-- Subscribe Section -->
+    <div class="mb-12 text-center">
+        <h2 class="text-2xl font-semibold mb-4" style="color: {{ .Site.Params.colors.text }}">Subscribe to the Podcast</h2>
+        <div class="flex justify-center gap-4">
+            {{ with .Site.Params.podcast.distribution.spotify }}
+            <a href="{{ . }}" target="_blank" class="px-4 py-2 rounded-full text-white" style="background-color: {{ $.Site.Params.colors.primary }}">
+                Spotify
+            </a>
+            {{ end }}
+            {{ with .Site.Params.podcast.distribution.apple }}
+            <a href="{{ . }}" target="_blank" class="px-4 py-2 rounded-full text-white" style="background-color: {{ $.Site.Params.colors.accent }}">
+                Apple Podcasts
+            </a>
+            {{ end }}
+            {{ with .Site.Params.podcast.distribution.google }}
+            <a href="{{ . }}" target="_blank" class="px-4 py-2 rounded-full text-white" style="background-color: {{ $.Site.Params.colors.secondary }}">
+                Google Podcasts
+            </a>
+            {{ end }}
+        </div>
+    </div>
+
+    <!-- Episodes List -->
+    <div class="grid gap-8 max-w-4xl mx-auto">
+        {{ $paginator := .Paginate (where .Pages.ByDate.Reverse "Type" "podcast") }}
+        {{ range $paginator.Pages }}
+        <article class="border rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div class="flex flex-col md:flex-row gap-6">
+                {{ with .Params.featuredImage }}
+                <div class="md:w-1/3">
+                    <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-48 object-cover rounded-lg">
+                </div>
+                {{ end }}
+                <div class="md:w-2/3">
+                    <h2 class="text-2xl font-bold mb-2">
+                        <a href="{{ .RelPermalink }}" style="color: {{ $.Site.Params.colors.primary }}" class="hover:opacity-80">
+                            {{ .Title }}
+                        </a>
+                    </h2>
+                    <div style="color: {{ $.Site.Params.colors.textLight }}" class="mb-3">
+                        Episode {{ .Params.episodeNumber }} • {{ .Date.Format "January 2, 2006" }} • {{ .Params.duration }}
+                    </div>
+                    <p style="color: {{ $.Site.Params.colors.text }}" class="mb-4">{{ .Description }}</p>
+                    <div class="flex gap-3">
+                        <a href="{{ .RelPermalink }}" 
+                           class="inline-flex items-center px-4 py-2 rounded-full text-white"
+                           style="background-color: {{ $.Site.Params.colors.primary }}">
+                            Listen Now
+                        </a>
+                        {{ with .Params.spotifyLink }}
+                        <a href="{{ . }}" 
+                           target="_blank" 
+                           class="inline-flex items-center px-4 py-2 rounded-full text-white"
+                           style="background-color: {{ $.Site.Params.colors.secondary }}">
+                            Spotify
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+        </article>
+        {{ end }}
+    </div>
+
+    <!-- Pagination -->
+    {{ if gt $paginator.TotalPages 1 }}
+    <div class="mt-8 flex justify-center gap-2">
+        {{ if $paginator.HasPrev }}
+        <a href="{{ $paginator.Prev.URL }}" 
+           class="px-4 py-2 rounded-lg"
+           style="background-color: {{ .Site.Params.colors.primary }}; color: white;">
+            Previous
+        </a>
+        {{ end }}
+        {{ if $paginator.HasNext }}
+        <a href="{{ $paginator.Next.URL }}"
+           class="px-4 py-2 rounded-lg"
+           style="background-color: {{ .Site.Params.colors.primary }}; color: white;">
+            Next
+        </a>
+        {{ end }}
+    </div>
+    {{ end }}
+</div>
+{{ end }}

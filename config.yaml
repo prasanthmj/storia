@@ -16,6 +16,7 @@ params:
   mainSections:
     - posts
     - articles
+    - podcast  # Added podcast to main sections
   
   # Theme customization
   colors:
@@ -51,6 +52,30 @@ params:
     umamiConfig:
       scriptUrl: "https://cloud.umami.is/script.js"
       websiteId: ""  # User will replace this with their ID
+      
+  # Podcast Configuration (Added)
+  podcast:
+    enabled: true
+    title: "StreamStoria Podcast"
+    description: "Your ultimate guide to content creation success"
+    author: "StreamStoria Team"
+    email: "podcast@streamstoria.com"
+    image: "/images/podcast-cover.jpg"
+    category: "Technology"
+    subcategory: "Content Creation"
+    explicit: false
+    copyright: "© 2024 StreamStoria"
+    feedLanguage: "en-us"
+    # Podcast Distribution Settings
+    distribution:
+      spotify: ""  # Spotify show URL
+      apple: ""   # Apple Podcasts URL
+      google: ""  # Google Podcasts URL
+    # Audio Player Settings
+    player:
+      showDownload: true
+      showShare: true
+      defaultSpeed: 1.0
 
 menu:
   main:
@@ -66,13 +91,17 @@ menu:
       name: "Posts"
       url: "/posts/"
       weight: 3
+    - identifier: "podcast"  # Added podcast menu item
+      name: "Podcast"
+      url: "/podcast/"
+      weight: 4
     - identifier: "contact"
       name: "Contact"
       url: "/contact/"
-      weight: 4
+      weight: 5
 
 # Hugo settings
-disableKinds: ["RSS"]  # Removed sitemap from disabled kinds
+disableKinds: []  # Removed RSS from disabled kinds to allow podcast feed
 pygmentsCodeFences: true
 pygmentsUseClasses: true
 
