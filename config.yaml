@@ -3,6 +3,12 @@ languageCode: "en-us"
 title: "My Storia Site"
 theme: "storia"
 
+# Enable sitemap generation
+sitemap:
+  changefreq: "weekly"
+  filename: "sitemap.xml"
+  priority: 0.5
+
 params:
   description: "A beautiful Hugo theme for content creators"
   author: "Your Name"
@@ -45,6 +51,7 @@ params:
     umamiConfig:
       scriptUrl: "https://cloud.umami.is/script.js"
       websiteId: ""  # User will replace this with their ID
+
 menu:
   main:
     - identifier: "home"
@@ -65,7 +72,7 @@ menu:
       weight: 4
 
 # Hugo settings
-disableKinds: ["RSS", "sitemap"]
+disableKinds: ["RSS"]  # Removed sitemap from disabled kinds
 pygmentsCodeFences: true
 pygmentsUseClasses: true
 
