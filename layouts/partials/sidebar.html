@@ -3,11 +3,13 @@
         
         <ul class="space-y-2">
             {{ range .Site.Sections }}
-            <li>
-                <a href="{{ .RelPermalink }}" class="content-link">
-                    {{ .Title | default (.Name | humanize) }} ({{ len .Pages }})
-                </a>
-            </li>
+                {{ if in $.Site.Params.mainSections .Section }}
+                <li>
+                    <a href="{{ .RelPermalink }}" class="content-link">
+                        {{ .Title | default (.Name | humanize) }} ({{ len .Pages }})
+                    </a>
+                </li>
+                {{ end }}
             {{ end }}
         </ul>
         <div class="mt-8">
@@ -27,8 +29,6 @@
                     <div class="text-sm">In <a href="{{ .Section | urlize | absURL }}" class="content-link text-sm">{{ .Section | humanize }}</a></div>
                 </div>
             </div>
-
-            
             {{ end }}
         </div>
        
