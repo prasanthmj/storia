@@ -1,5 +1,6 @@
 {{ define "main" }}
 <div class="container mx-auto px-4 py-8">
+    {{ partial "breadcrumbs/breadcrumb.html" . }}
     <header class="mb-12 text-center">
         <h1 class="text-4xl font-bold mb-4" style="color: {{ .Site.Params.colors.text }}">{{ .Site.Params.podcast.title }}</h1>
         <p class="text-xl" style="color: {{ .Site.Params.colors.textLight }}">{{ .Site.Params.podcast.description }}</p>

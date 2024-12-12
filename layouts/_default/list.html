@@ -1,6 +1,9 @@
 {{ define "main" }}
 <div class="bg-background  overflow-hidden">
-    <h1 class="text-4xl font-bold p-6 bg-background border-text-light font-serif text-primary">{{ .Title }}</h1>
+    <div class="px-6">
+    {{ partial "breadcrumbs/breadcrumb.html" . }}
+    </div>
+    <h1 class="text-3xl font-bold px-6 bg-background border-text-light font-serif text-primary">{{ .Title }}</h1>
     <div class="p-6">
         {{ if .Content }}
             <div class="article-content text-text mb-8">

@@ -1,6 +1,8 @@
 {{ define "main" }}
 <article class="bg-background overflow-hidden">
     <header class="p-6 bg-background border-text-light">
+        {{ partial "breadcrumbs/breadcrumb.html" . }}
+        
         <h1 class="mb-2 font-serif text-primary">{{ .Title }}</h1>
         <div class="text-base text-text-light">
             {{ if .Site.Params.showPublishDate }}

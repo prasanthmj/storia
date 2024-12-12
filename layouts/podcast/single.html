@@ -1,6 +1,7 @@
 {{ define "main" }}
 <article class="max-w-4xl mx-auto px-4 py-8">
     <header class="mb-8">
+        {{ partial "breadcrumbs/breadcrumb.html" . }}
         <h1 class="text-4xl font-bold mb-4">{{ .Title }}</h1>
         <div class="text-gray-600 mb-4">
             Episode {{ .Params.episodeNumber }} • {{ .Date.Format "January 2, 2006" }} • {{ .Params.duration }}

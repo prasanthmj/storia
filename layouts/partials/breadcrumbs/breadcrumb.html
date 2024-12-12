@@ -1,0 +1,30 @@
+{{ $url := replace .RelPermalink ( printf "%s" .Site.BaseURL) "/" }}
+{{ $urlParts := split (trim $url "/") "/" }}
+
+<nav aria-label="breadcrumb" class="text-sm mb-4">
+    <ol class="flex items-center space-x-2">
+        <li>
+            <a href="/" class="text-accent hover:text-primary">Home</a>
+        </li>
+
+        {{ range $index, $element := $urlParts }}
+            {{ $currentPath := "" }}
+            {{ range $i, $part := first (add $index 1) $urlParts }}
+                {{ $currentPath = printf "%s/%s" $currentPath $part }}
+            {{ end }}
+
+            {{ if ne $element "" }}
+                <li class="flex items-center">
+                    <svg class="h-4 w-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                    {{ if eq $index (sub (len $urlParts) 1) }}
+                        <span class="text-text ml-2">{{ humanize $element }}</span>
+                    {{ else }}
+                        <a href="{{ $currentPath }}" class="text-accent hover:text-primary ml-2">{{ humanize $element }}</a>
+                    {{ end }}
+                </li>
+            {{ end }}
+        {{ end }}
+    </ol>
+</nav>
