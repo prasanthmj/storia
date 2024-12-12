@@ -9,7 +9,9 @@
             <span>Published on {{ .Date.Format "January 2, 2006" }}</span>
             <span class="mx-2">|</span>
             {{ end }}
+            {{ if ne .Section "" }}
             <span>In <a href="{{ .Section | urlize | absURL }}" class="text-accent hover:text-primary">{{ .Section | humanize }}</a></span>
+            {{ end }}
             {{ with .Params.tags }}
             <span class="mx-2">|</span>
             <span>

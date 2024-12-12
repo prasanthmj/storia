@@ -16,7 +16,7 @@
             
             {{ $mainSections := .Site.Params.mainSections }}
             {{ $pages := where .Site.RegularPages "Section" "in" $mainSections }}
-            {{ range first 5 $pages }}
+            {{ range first 10 $pages }}
             <div class="bg-background rounded-lg shadow-md overflow-hidden px-4 mb-5">
                 {{ partial "get-image.html" (dict "context" . "class" "w-full h-32 object-cover") }}
                 <div class="p-4">
