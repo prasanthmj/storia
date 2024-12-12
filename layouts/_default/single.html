@@ -28,12 +28,12 @@
         </div>
     </div>
 
-    {{ $related := .Site.RegularPages.Related . | first 6 }}
+    {{ $pages := where .Site.RegularPages "Section" "in" .Site.Params.mainSections }}
+    {{ $related := $pages.Related . }}
     {{ with $related }}
     <footer class="p-6 bg-background mt-6">
-        
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {{ range . }}
+            {{ range . | first 6 }}
             <div class="bg-background rounded-lg shadow-md overflow-hidden">
                 {{ partial "get-image.html" (dict "context" . "class" "w-full h-32 object-cover") }}
                 <div class="p-4">
