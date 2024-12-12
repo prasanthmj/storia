@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    {{ $pages := where .Site.RegularPages "Section" "ne" "legal" }}
+    {{ $pages := where .Site.RegularPages "Section" "in" .Site.Params.mainSections }}
     {{ $related := $pages.Related . }}
     {{ with $related }}
     <footer class="p-6 bg-background mt-6">
