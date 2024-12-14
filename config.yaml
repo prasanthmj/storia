@@ -60,7 +60,7 @@ params:
     description: "Your ultimate guide to content creation success"
     author: "StreamStoria Team"
     email: "podcast@streamstoria.com"
-    image: "https://www.streamstoria.com/images/podcast/cover.png"
+    image: "https://www.streamstoria.com/images/podcast/cover.jpg"
     category: "Technology"
     subcategory: "Content Creation"
     explicit: false
