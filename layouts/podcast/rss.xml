@@ -33,9 +33,7 @@
             {{ with .Params.featuredImage }}
             <itunes:image href="{{ $.Site.BaseURL }}{{ strings.TrimPrefix "/" . }}"/>
             {{ end }}
-            <content:encoded>
-                <![CDATA[{{ .Content }}]]>
-            </content:encoded>
+            <content:encoded>{{ print "<![CDATA[" | safeHTML }}{{ .Content | safeHTML }}{{ print "]]>" | safeHTML }}</content:encoded>
         </item>
         {{ end }}
     </channel>
