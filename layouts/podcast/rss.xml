@@ -2,12 +2,12 @@
 <rss version="2.0" 
     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
     xmlns:content="http://purl.org/rss/1.0/modules/content/"
-    xmlns:podcast="https://podcastindex.org/namespace/1.0"
+    xmlns:podcast="https://podcastindex.org/namespace/1.0#"
     xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>{{ .Site.Params.podcast.title }}</title>
         <link>{{ .Site.BaseURL }}</link>
-        <atom:link href="{{ .Permalink }}podcast/index.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="{{ .Permalink }}feed.xml" rel="self" type="application/rss+xml"/>
         <language>{{ .Site.LanguageCode }}</language>
         <itunes:author>{{ .Site.Params.podcast.author }}</itunes:author>
         <description>{{ .Site.Params.podcast.description }}</description>
