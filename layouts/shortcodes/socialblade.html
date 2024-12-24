@@ -1,0 +1,6 @@
+{{ $channelId := .Get "channelId" }}
+{{ $imgSrc := printf "/assets/estimated-earnings/socialblade/%s.png" $channelId }}
+<div class="socialblade-stats mb-4">
+    <img src="{{ $imgSrc }}" alt="SocialBlade stats for {{ $channelId }}" class="w-full rounded-lg shadow-md">
+    <p class="text-sm text-gray-600 mt-2 italic">Data from <a href="https://socialblade.com/youtube/channel/{{ $channelId }}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800">SocialBlade</a></p>
+</div>
