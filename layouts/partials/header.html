@@ -2,7 +2,7 @@
   <div class="container mx-auto px-4 py-4 flex flex-wrap items-center justify-between">
       <div class="flex items-center">
           {{ if .Site.Params.logo }}
-          <img src="{{ .Site.Params.logo | relURL }}" alt="{{ .Site.Title }} Logo" class="h-8 w-8 mr-3">
+          <img src="{{ .Site.Params.logo | relURL }}" alt="{{ .Site.Title }} Logo" class="h-8 w-8 mr-3 rounded-md">
           {{ end }}
           <a href="{{ .Site.Home.RelPermalink }}" class="text-xl font-bold nav-link">{{ .Site.Title }}</a>
       </div>

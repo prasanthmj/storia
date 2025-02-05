@@ -6,41 +6,58 @@
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
 <meta name="robots" content="index, follow">
 <meta name="author" content="{{ .Site.Params.author }}">
-<meta name="keywords" content="{{ if .Keywords }}{{ delimit .Keywords ", " }}{{ else }}content creation, youtube tips, faceless youtube, video content, content strategy{{ end }}">
+<meta name="keywords" content="{{ with .Keywords }}{{ delimit . ", " }}{{ else }}content creation, youtube tips, faceless youtube, video content, content strategy{{ end }}">
 
-<!-- Canonical URL -->
+<!-- Canonical Link -->
 <link rel="canonical" href="{{ .Permalink }}">
 
 <!-- Feeds -->
 <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }} RSS Feed" href="{{ "feed.xml" | absURL }}">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ "sitemap.xml" | absURL }}">
 
-<!-- Open Graph -->
+<!-- Favicons and App Icons -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#3490dc">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="msapplication-TileColor" content="#3490dc">
+
+<!-- OpenGraph Tags -->
 <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}">
 <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
-{{ with .Site.Params.logo }}
-<meta property="og:image" content="{{ . | absURL }}">
+{{ if .Params.images }}
+<meta property="og:image" content="{{ index .Params.images 0 | absURL }}">
+{{ else }}
+<meta property="og:image" content="{{ "streamstoria.png" | absURL }}">
 {{ end }}
 
-<!-- Twitter Card -->
+<!-- Twitter Card Tags -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}">
 <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
-{{ with .Site.Params.logo }}
-<meta name="twitter:image" content="{{ . | absURL }}">
+{{ if .Params.images }}
+<meta name="twitter:image" content="{{ index .Params.images 0 | absURL }}">
+{{ else }}
+<meta name="twitter:image" content="{{ "streamstoria.png" | absURL }}">
 {{ end }}
 
 <!-- Schema.org -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": {{ if .IsHome }}"WebSite"{{ else }}"WebPage"{{ end }},
+  "@type": "{{ if .IsPage }}Article{{ else }}WebSite{{ end }}",
   "name": "{{ .Site.Title }}",
   "description": "{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}",
   "url": "{{ .Permalink }}",
-  {{ if not .IsHome }}"isPartOf": { "@type": "WebSite", "name": "{{ .Site.Title }}", "url": "{{ .Site.BaseURL }}" },{{ end }}
+  {{ if .IsPage }}
+  "headline": "{{ .Title }}",
+  "datePublished": "{{ .Date.Format "2006-01-02T15:04:05-07:00" }}",
+  "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }}",
+  {{ end }}
   "author": {
     "@type": "Person",
     "name": "{{ .Site.Params.author }}"
@@ -50,23 +67,20 @@
     "name": "{{ .Site.Title }}",
     "logo": {
       "@type": "ImageObject",
-      "url": "{{ .Site.Params.logo | absURL }}"
+      "url": "{{ "streamstoria.png" | absURL }}"
     }
   }
-  {{ if .IsPage }},
-  "datePublished": "{{ .Date.Format "2006-01-02T15:04:05-07:00" }}",
-  "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }}"
+  {{ if .Params.images }},
+  "image": "{{ index .Params.images 0 | absURL }}"
   {{ end }}
 }
 </script>
 
-<!-- Preload Critical Resources -->
+<!-- Performance Optimizations -->
 <link rel="preload" href="{{ "css/style.css" | relURL }}" as="style">
-{{ with .Site.Params.logo }}
-<link rel="preload" as="image" href="{{ . }}">
-{{ end }}
+<link rel="preload" as="image" href="{{ "streamstoria.png" | relURL }}">
 
-<!-- Font loading -->
+<!-- Fonts -->
 {{ if .Site.Params.customFonts }}
   {{ range .Site.Params.customFonts }}
     <link rel="stylesheet" href="{{ . }}">
@@ -77,20 +91,36 @@
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 {{ end }}
 
+<!-- Theme -->
 {{ partial "custom-theme.html" . }}
-
 <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
 
-{{ if not hugo.IsProduction }}
+<!-- Service Worker -->
+{{ if hugo.IsProduction }}
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js');
+    });
+  }
+</script>
+{{ else }}
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 {{ end }}
 
-{{ partial "analytics.html" . }}
+<!-- Analytics -->
+{{ if and hugo.IsProduction .Site.Params.analytics.enabled }}
+  {{ if eq .Site.Params.analytics.provider "umami" }}
+    <script defer 
+      src="{{ .Site.Params.analytics.umamiConfig.scriptUrl }}" 
+      data-website-id="{{ .Site.Params.analytics.umamiConfig.websiteId }}">
+    </script>
+  {{ end }}
+{{ end }}
 
 <!-- Error Tracking -->
-{{ if hugo.IsProduction }}
 <script>
   window.onerror = function(msg, url, lineNo, columnNo, error) {
     if (window.umami) {
@@ -105,4 +135,3 @@
     return false;
   };
 </script>
-{{ end }}
