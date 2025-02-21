@@ -1,97 +1,22 @@
 {{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml"
-  xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
-  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  
-  {{/* Homepage - only once */}}
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  {{ range .Data.Pages }}
   <url>
-    <loc>{{ .Site.BaseURL | strings.TrimSuffix "/" }}</loc>
-    <lastmod>{{ now.Format "2006-01-02T15:04:05-07:00" }}</lastmod>
-    <changefreq>hourly</changefreq>
-    <priority>1.0</priority>
+    <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
+    <lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>{{ end }}{{ with .Sitemap.ChangeFreq }}
+    <changefreq>{{ . }}</changefreq>{{ end }}{{ if ge .Sitemap.Priority 0.0 }}
+    <priority>{{ .Sitemap.Priority }}</priority>{{ end }}{{ if .IsTranslated }}{{ range .Translations }}
+    <xhtml:link
+                rel="alternate"
+                hreflang="{{ .Language.Lang }}"
+                href="{{ .Permalink }}"
+                />{{ end }}
+    <xhtml:link
+                rel="alternate"
+                hreflang="{{ .Language.Lang }}"
+                href="{{ .Permalink }}"
+                />{{ end }}
   </url>
-
-  {{/* All other pages */}}
-  {{ range where .Data.Pages "Kind" "in" (slice "page" "section" "taxonomy" "term") }}
-    {{/* Skip home page since we already added it */}}
-    {{ if not .IsHome }}
-    <url>
-      <loc>{{ .Permalink | strings.TrimSuffix "/" }}</loc>
-
-      {{/* Handle lastmod dates */}}
-      {{ $lastmod := .Lastmod }}
-      {{ if eq $lastmod.Year 1 }}
-        {{ $lastmod = .Date }}
-        {{ if eq .Date.Year 1 }}
-          {{ $lastmod = now }}
-        {{ end }}
-      {{ end }}
-      <lastmod>{{ $lastmod.Format "2006-01-02T15:04:05-07:00" }}</lastmod>
-
-      {{/* Calculate age in days */}}
-      {{ $age := div (sub now.Unix .Date.Unix) 86400 }}
-      
-      {{/* Dynamic priority based on page type and age */}}
-      {{ $priority := 0.5 }}
-      {{ if .IsHome }}
-        {{ $priority = 1.0 }}
-      {{ else if eq .Kind "section" }}
-        {{ $priority = 0.8 }}
-      {{ else if and (eq .Kind "page") (lt $age 7) }}
-        {{ $priority = 0.9 }}
-      {{ else if and (eq .Kind "page") (lt $age 30) }}
-        {{ $priority = 0.8 }}
-      {{ else if eq .Kind "taxonomy" }}
-        {{ $priority = 0.3 }}
-      {{ else if eq .Kind "term" }}
-        {{ $priority = 0.3 }}
-      {{ else if eq .Type "page" }}
-        {{ $priority = 0.4 }}
-      {{ end }}
-      <priority>{{ $priority }}</priority>
-
-      {{/* Dynamic changefreq based on content type and age */}}
-      <changefreq>
-        {{- if .IsHome -}}hourly
-        {{- else if lt $age 7 -}}daily
-        {{- else if lt $age 30 -}}weekly
-        {{- else -}}monthly
-        {{- end -}}
-      </changefreq>
-
-      {{/* Add image information if page has images */}}
-      {{ with .Params.images }}
-        {{ range . }}
-          <image:image>
-            <image:loc>{{ . | absURL }}</image:loc>
-          </image:image>
-        {{ end }}
-      {{ end }}
-
-      {{/* Add news tags for very recent content */}}
-      {{ if lt $age 2 }}
-        <news:news>
-          <news:publication>
-            <news:name>{{ $.Site.Title }}</news:name>
-            <news:language>{{ $.Site.LanguageCode }}</news:language>
-          </news:publication>
-          <news:publication_date>{{ .Date.Format "2006-01-02T15:04:05-07:00" }}</news:publication_date>
-          <news:title>{{ .Title }}</news:title>
-        </news:news>
-      {{ end }}
-
-      {{/* Handle translations if present */}}
-      {{ if .IsTranslated }}
-        {{ range .Translations }}
-          <xhtml:link
-            rel="alternate"
-            hreflang="{{ .Language.Lang }}"
-            href="{{ .Permalink }}"
-          />
-        {{ end }}
-      {{ end }}
-    </url>
-    {{ end }}
   {{ end }}
 </urlset>
