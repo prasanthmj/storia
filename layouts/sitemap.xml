@@ -1,14 +1,13 @@
 {{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\" ?>" | safeHTML }}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
-  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
   xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
   xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0">
   
-  {{/* Homepage with highest priority */}}
+  {{/* Homepage */}}
   <url>
     <loc>{{ .Site.BaseURL }}</loc>
-    <changefreq>daily</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <mobile:mobile/>
   </url>
@@ -42,11 +41,11 @@
         0.5
       {{- end -}}</priority>
 
-      {{/* Smart Changefreq Assignment */}}
+      {{/* Frequency Assignment */}}
       <changefreq>{{- if eq .Kind "home" -}}
-        daily
+        weekly
       {{- else if eq .Type "podcast" -}}
-        daily
+        weekly
       {{- else if eq .Type "content" -}}
         weekly
       {{- else if eq .Type "growth" -}}
@@ -62,18 +61,7 @@
       {{/* Mobile Indicator */}}
       <mobile:mobile/>
 
-      {{/* Add image sitemap entries if page has images */}}
-      {{ with .Resources.ByType "image" }}
-        {{ range . }}
-          <image:image>
-            <image:loc>{{ .Permalink }}</image:loc>
-            {{ with .Title }}<image:title>{{ . }}</image:title>{{ end }}
-            {{ with .Params.alt }}<image:caption>{{ . }}</image:caption>{{ end }}
-          </image:image>
-        {{ end }}
-      {{ end }}
-
-      {{/* Add video sitemap entries for podcast content */}}
+      {{/* Video sitemap entries for podcast content */}}
       {{ if eq .Type "podcast" }}
         <video:video>
           <video:title>{{ .Title }}</video:title>
